@@ -1,0 +1,8 @@
+trigger ProjectTrigger on Project__c (before insert, before update) {
+    
+    for (Project__c proj : Trigger.new) {
+        if (proj.End_Date__c < proj.Start_Date__c) {
+            proj.addError('End Date must be greater than or equal to Start Date');
+        }	
+    }
+}
