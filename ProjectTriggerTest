@@ -1,0 +1,20 @@
+@isTest
+public class ProjectTriggerTest {
+    @isTest
+    static void testEndDateValidation() {
+        Project__c invalidProject = new Project__c(
+            Name = 'Invalid Project',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today().addDays(-1),
+            Status__c = 'Planned',
+            Description__c = 'This project has an invalid end date'
+        );
+
+        Test.startTest();
+        
+            insert invalidProject;
+        
+        Test.stopTest();
+
+    }
+}
