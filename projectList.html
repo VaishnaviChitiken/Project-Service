@@ -2,12 +2,21 @@
     <c-create-project onprojectcreate={handleProjectCreate}></c-create-project>
     <lightning-card title="Project List" icon-name="standard:task">
         <div class="slds-m-around_medium">
-            <lightning-combobox label="Filter by Status" value={status} options={statusOptions}
+            <lightning-combobox 
+                label="Filter by Status" 
+                value={status} 
+                options={statusOptions}
                 onchange={handleStatusChange}>
             </lightning-combobox>
-            <lightning-datatable key-field="id" data={projects} columns={columns} onrowaction={handleRowAction}>
+            <lightning-datatable 
+               key-field="id" 
+               data={projects} 
+               columns={columns} 
+               onrowaction={handleRowAction}>
             </lightning-datatable>
         </div>
     </lightning-card>
-    <c-project-detail project={selectedProject} onprojectsave={handleProjectSave}></c-project-detail>
+    <c-project-detail 
+        project={selectedProject} 
+        onprojectsave={handleProjectSave}></c-project-detail>
 </template>
