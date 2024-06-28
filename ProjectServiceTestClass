@@ -1,0 +1,61 @@
+@isTest
+public class ProjectServiceTest {
+
+    @testSetup
+    static void setup() {
+        // Create test data
+        Project__c project1 = new Project__c(
+            Name = 'Test Project 1',
+            Description__c = 'Description for Test Project 1',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today().addDays(5),
+            Status__c = 'Planned'
+        );
+        insert project1;
+
+        Project__c project2 = new Project__c(
+            Name = 'Test Project 2',
+            Description__c = 'Description for Test Project 2',
+            Start_Date__c = Date.today(),
+            End_Date__c = Date.today().addDays(10),
+            Status__c = 'In Progress'
+        );
+        insert project2;
+    }
+
+    @isTest
+    static void testCreateProject() {
+        Project__c project = ProjectService.createProject(
+            'New Project',
+            'Description for New Project',
+            Date.today(),
+            Date.today().addDays(7),
+            'Planned'
+        );
+
+    }
+
+    @isTest
+    static void testUpdateProject() {
+        Project__c project = [SELECT Id, Name FROM Project__c LIMIT 1];
+        
+        Project__c updatedProject = ProjectService.updateProject(
+            project.Id,
+            'Updated Project Name',
+            'Updated Description',
+            Date.today().addDays(1),
+            Date.today().addDays(8),
+            'Completed'
+        );
+
+        Project__c projectAfterUpdate = [SELECT Name, Description__c, Start_Date__c, End_Date__c, Status__c FROM Project__c WHERE Id = :project.Id];
+        
+    }
+
+    @isTest
+    static void testGetProjectsByStatus() {
+        List<Project__c> plannedProjects = ProjectService.getProjectsByStatus('Planned');
+        
+        List<Project__c> inProgressProjects = ProjectService.getProjectsByStatus('In Progress');
+    }
+}
