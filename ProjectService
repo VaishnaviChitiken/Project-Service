@@ -1,0 +1,54 @@
+public class ProjectService {
+    
+    @AuraEnabled
+    public static Project__c createProject(String name, String description, Date startDate, Date endDate,  String status) {
+
+        Project__c project = new Project__c();
+        project.Name=name;
+        project.Description__c = description;
+        project.Start_date__c=startDate;
+        project.End_date__c=endDate;
+        project.Status__c=status;
+        insert project;
+        return project;
+    }	
+        
+     /* @AuraEnabled
+     public static Project__c updateProject(Id projectId, String projectName, String description, Date startDate, Date endDate, String status) {
+        
+         Project__c project = [SELECT Id, Name, Description__c, Start_Date__c, End_Date__c, Status__c FROM Project__c WHERE Id = :projectId];
+         project.Name = projectName;
+         project.Description__c = description;
+         project.Start_Date__c = startDate;
+         project.End_Date__c = endDate;
+         project.Status__c = status;
+         update project;
+         return project;
+     } */
+    
+     @AuraEnabled
+     public static List<Project__c> getProjectsByStatus(String status) {
+        return [SELECT Id, Name, Start_Date__c, End_Date__c, Status__c, Description__c 
+                FROM Project__c 
+                WHERE Status__c = :status];
+    }
+    
+    @AuraEnabled
+    public static Project__c getProjectById(Id projectId) {
+        return [SELECT Id, Name, Start_Date__c, End_Date__c, Status__c, Description__c FROM Project__c WHERE Id = :projectId LIMIT 1];
+    }
+
+    @AuraEnabled
+    public static void updateProject(Id projectId, String name, Date startDate, Date endDate, String status, String description) {
+        Project__c existingProject = [SELECT Id, Name, Start_Date__c, End_Date__c, Status__c, Description__c 
+                                      FROM Project__c WHERE Id = :projectId LIMIT 1];
+        if (existingProject != null) {
+            existingProject.Name = name;
+            existingProject.Start_Date__c = startDate;
+            existingProject.End_Date__c = endDate;
+            existingProject.Status__c = status;
+            existingProject.Description__c = description;
+            update existingProject;
+        }
+    }
+}
