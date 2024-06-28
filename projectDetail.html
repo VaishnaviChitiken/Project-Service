@@ -2,42 +2,17 @@
     <lightning-card title="Project Detail" icon-name="standard:task">
         <div class="slds-m-around_medium">
             <template if:true={project}>
-                <lightning-input label="Project Name" 
-                   value={project.Name} 
-                   onchange={handleInputChange} 
-                   data-id="Name">
-                </lightning-input>
-                <lightning-input 
-                   label="Description" 
-                   value={project.Description__c} 
-                   onchange={handleInputChange} 
-                   data-id="Description__c">
-                </lightning-input>
-                <lightning-input 
-                   label="Start Date" 
-                   type="date" 
-                   value={project.Start_Date__c} 
-                   onchange={handleInputChange} 
-                   data-id="Start_Date__c">
-                </lightning-input>
-                <lightning-input 
-                   label="End Date" 
-                   type="date" 
-                   value={project.End_Date__c} 
-                   onchange={handleInputChange} 
-                   data-id="End_Date__c">
-                </lightning-input>
-                <lightning-combobox 
-                   label="Status" 
-                   value={project.Status__c} 
-                   options={statusOptions} 
-                   onchange={handleInputChange} 
-                   data-id="Status__c">
-                </lightning-combobox>
-                <lightning-button 
-                   label="Save" 
-                   onclick={handleSave}>
-                </lightning-button>
+                <lightning-input label="Project Name" value={projectName} onchange={handleInputChange}
+                    data-id="Name"></lightning-input>
+                <lightning-input label="Description" value={projectDescription} onchange={handleInputChange}
+                    data-id="Description__c"></lightning-input>
+                <lightning-input label="Start Date" type="date" value={projectStartDate} onchange={handleInputChange}
+                    data-id="Start_Date__c"></lightning-input>
+                <lightning-input label="End Date" type="date" value={projectEndDate} onchange={handleInputChange}
+                    data-id="End_Date__c"></lightning-input>
+                <lightning-combobox label="Status" value={projectStatus} options={statusOptions}
+                    onchange={handleInputChange} data-id="Status__c"></lightning-combobox>
+                <lightning-button label="Save" onclick={handleSave}></lightning-button>
             </template>
         </div>
     </lightning-card>
