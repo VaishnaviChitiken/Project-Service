@@ -1,0 +1,46 @@
+<template>
+    <lightning-card title="Create Project" icon-name="custom:custom63">
+        <div class="slds-p-around_medium">
+            <lightning-input 
+               label="Project Name"
+               value={name} 
+               onchange={handleInputChange} 
+               data-id="name" 
+               required>
+            </lightning-input>
+            <lightning-input 
+                type="date"
+                label="Start Date"
+                value={startDate}
+                 onchange={handleInputChange}
+                  data-id="startDate" required></lightning-input>
+            <lightning-input
+                type="date"
+                label="End Date"
+                value={endDate}
+                onchange={handleInputChange}
+                data-id="endDate"
+                required></lightning-input>
+            <lightning-combobox
+                label="Status"
+                 value={status}
+                 onchange={handleInputChange}
+                 data-id="status"
+                 options={statusOptions}
+                 required>
+            </lightning-combobox>
+            <lightning-textarea
+                label="Description"
+                value={description}
+                onchange={handleInputChange} 
+                data-id="description">
+            </lightning-textarea>
+            <lightning-button 
+               label="Create Project" 
+               onclick={createProject} 
+               class="slds-m-top_medium" 
+               variant="brand">
+            </lightning-button>
+        </div>
+    </lightning-card>
+</template>
